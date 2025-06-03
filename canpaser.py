@@ -686,12 +686,8 @@ for folder in Org_file_list:
                     if len(line) < 12:
                         continue
                     left_roll = int(line[5] + line[4], 16)
-                    if left_roll > 32767:
-                        left_roll -= 65536
                     left_roll /= 100
                     right_roll = int(line[7] + line[6], 16)
-                    if right_roll > 32767:
-                        right_roll -= 65536
                     right_roll /= 100
                     writer = csv.writer(f_front_shock)
                     writer.writerow([time, left_roll, right_roll])
@@ -703,8 +699,6 @@ for folder in Org_file_list:
                         left_roll -= 65536
                     left_roll /= 100
                     right_roll = int(line[7] + line[6], 16)
-                    if right_roll > 32767:
-                        right_roll -= 65536
                     right_roll /= 100
                     writer = csv.writer(f_rear_shock)
                     writer.writerow([time, left_roll, right_roll])
