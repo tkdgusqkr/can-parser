@@ -667,9 +667,9 @@ for folder in Org_file_list:
                     steering_angle /= 100
                     apps = int(line[6], 16)
                     bpps = int(line[7], 16)
-                    brake_pressure0 = int(line[8] + line[9], 16)
+                    brake_pressure0 = int(line[9] + line[8], 16)
                     brake_pressure0 /= 10
-                    brake_pressure1 = int(line[10] + line[11], 16)
+                    brake_pressure1 = int(line[11] + line[10], 16)
                     brake_pressure1 /= 10
                     writer = csv.writer(f_steering_and_pedal)
                     writer.writerow([time, steering_angle, apps, bpps, brake_pressure0, brake_pressure1])
