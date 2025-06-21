@@ -86,10 +86,10 @@ for folder in Org_file_list:
         f_start_up = open(file_dst + directory + '_start_up.csv', 'w', newline='')
         f_pack_power = open(file_dst + directory + '_pack_power.csv', 'w', newline='')
         f_free_acc = open(file_dst + directory + '_free_acc.csv', 'w', newline='')
-        f_gry_hr = open(file_dst + directory + '_gry_hr.csv', 'w', newline='')
+        f_gry = open(file_dst + directory + '_gry.csv', 'w', newline='')
         f_velocity = open(file_dst + directory + '_velocity.csv', 'w', newline='')
         f_euler_angle = open(file_dst + directory + '_euler_angle.csv', 'w', newline='')
-        f_acc_hr = open(file_dst + directory + '_acc_hr.csv', 'w', newline='')
+        f_acc = open(file_dst + directory + '_acc.csv', 'w', newline='')
         f_coordinate = open(file_dst + directory + '_coordinate.csv', 'w', newline='')
         f_altitude = open(file_dst + directory + '_altitude.csv', 'w', newline='')
         f_pack_status = open(file_dst + directory + '_pack_status.csv', 'w', newline='')
@@ -128,13 +128,13 @@ for folder in Org_file_list:
         writer.writerow(['time', 'current (A)', 'voltage (V)', 'ccl (A)', 'dcl (A)'])
         writer = csv.writer(f_free_acc)
         writer.writerow(['time', 'acc_x (m/s\u00B2)', 'acc_y (m/s\u00B2)', 'acc_z (m/s\u00B2)'])
-        writer = csv.writer(f_gry_hr)
+        writer = csv.writer(f_gry)
         writer.writerow(['time', 'gyr_x (rad/s)', 'gyr_y (rad/s)', 'gyr_z (rad/s)'])
         writer = csv.writer(f_velocity)
         writer.writerow(['time', 'vel_x (m/s)', 'vel_y (m/s)', 'vel_z (m/s)'])
         writer = csv.writer(f_euler_angle)
         writer.writerow(['time', 'roll (\u00B0)', 'pitch (\u00B0)', 'yaw (\u00B0)'])
-        writer = csv.writer(f_acc_hr)
+        writer = csv.writer(f_acc)
         writer.writerow(['time', 'acc_x (m/s\u00B2)', 'acc_y (m/s\u00B2)', 'acc_z (m/s\u00B2)'])
         writer = csv.writer(f_coordinate)
         writer.writerow(['time', 'lat (\u00B0)', 'lon (\u00B0)'])
@@ -249,49 +249,49 @@ for folder in Org_file_list:
                     acc_x = int(line[4] + line[5], 16)
                     if acc_x > 32767:
                         acc_x -= 65536
-                    acc_x /= 2^8
+                    acc_x /= 2**8
                     acc_y = int(line[6] + line[7], 16)
                     if acc_y > 32767:
                         acc_y -= 65536
-                    acc_y /= 2^8
+                    acc_y /= 2**8
                     acc_z = int(line[8] + line[9], 16)
                     if acc_z > 32767:
                         acc_z -= 65536
-                    acc_z /= 2^8
+                    acc_z /= 2**8
                     writer = csv.writer(f_free_acc)
                     writer.writerow([time, acc_x, acc_y, acc_z])
                 if line[3] == '00000321':
                     if len(line) < 10:
                         continue
-                    gyr_x = int(line[4] + line[5], 16)
-                    if gyr_x > 32767:
-                        gyr_x -= 65536
-                    gyr_x /= 2^9
-                    gyr_y = int(line[6] + line[7], 16)
-                    if gyr_y > 32767:
-                        gyr_y -= 65536
-                    gyr_y /= 2^9
-                    gyr_z = int(line[8] + line[9], 16)
-                    if gyr_z > 32767:
-                        gyr_z -= 65536
-                    gyr_z /= 2^9
-                    writer = csv.writer(f_gry_hr)
-                    writer.writerow([time, gyr_x, gyr_y, gyr_z])
+                    acc_x = int(line[4] + line[5], 16)
+                    if acc_x > 32767:
+                        acc_x -= 65536
+                    acc_x /= 2**8
+                    acc_y = int(line[6] + line[7], 16)
+                    if acc_y > 32767:
+                        acc_y -= 65536
+                    acc_y /= 2**8
+                    acc_z = int(line[8] + line[9], 16)
+                    if acc_z > 32767:
+                        acc_z -= 65536
+                    acc_z /= 2**8
+                    writer = csv.writer(f_acc)
+                    writer.writerow([time, acc_x, acc_y, acc_z])
                 if line[3] == '00000322':
                     if len(line) < 10:
                         continue
                     vel_x = int(line[4] + line[5], 16)
                     if vel_x > 32767:
                         vel_x -= 65536
-                    vel_x /= 2^6
+                    vel_x /= 2**6
                     vel_y = int(line[6] + line[7], 16)
                     if vel_y > 32767:
                         vel_y -= 65536
-                    vel_y /= 2^6
+                    vel_y /= 2**6
                     vel_z = int(line[8] + line[9], 16)
                     if vel_z > 32767:
                         vel_z -= 65536
-                    vel_z /= 2^6
+                    vel_z /= 2**6
                     writer = csv.writer(f_velocity)
                     writer.writerow([time, vel_x, vel_y, vel_z])
                 if line[3] == '00000323':
@@ -300,45 +300,45 @@ for folder in Org_file_list:
                     roll = int(line[4] + line[5], 16)
                     if roll > 32767:
                         roll -= 65536
-                    roll /= 2^7
+                    roll /= 2**7
                     pitch = int(line[6] + line[7], 16)
                     if pitch > 32767:
                         pitch -= 65536
-                    pitch /= 2^7
+                    pitch /= 2**7
                     yaw = int(line[8] + line[9], 16)
                     if yaw > 32767:
                         yaw -= 65536
-                    yaw /= 2^7
+                    yaw /= 2**7
                     writer = csv.writer(f_euler_angle)
                     writer.writerow([time, roll, pitch, yaw])
                 if line[3] == '00000420':
                     if len(line) < 10:
                         continue
-                    acc_x = int(line[4] + line[5], 16)
-                    if acc_x > 32767:
-                        acc_x -= 65536
-                    acc_x /= 2^8
-                    acc_y = int(line[6] + line[7], 16)
-                    if acc_y > 32767:
-                        acc_y -= 65536
-                    acc_y /= 2^8
-                    acc_z = int(line[8] + line[9], 16)
-                    if acc_z > 32767:
-                        acc_z -= 65536
-                    acc_z /= 2^8
-                    writer = csv.writer(f_acc_hr)
-                    writer.writerow([time, acc_x, acc_y, acc_z])
+                    gyr_x = int(line[4] + line[5], 16)
+                    if gyr_x > 32767:
+                        gyr_x -= 65536
+                    gyr_x /= 2**9
+                    gyr_y = int(line[6] + line[7], 16)
+                    if gyr_y > 32767:
+                        gyr_y -= 65536
+                    gyr_y /= 2**9
+                    gyr_z = int(line[8] + line[9], 16)
+                    if gyr_z > 32767:
+                        gyr_z -= 65536
+                    gyr_z /= 2**9
+                    writer = csv.writer(f_gry)
+                    writer.writerow([time, gyr_x, gyr_y, gyr_z])
                 if line[3] == '00000421':
                     if len(line) < 12:
                         continue
                     lat = int(line[4] + line[5] + line[6] + line[7], 16)
                     if lat > 2147483647:
                         lat -= 4294967296
-                    lat /= 2^24
+                    lat /= 2**24
                     lon = int(line[8] + line[9] + line[10] + line[11], 16)
                     if lon > 2147483647:
                         lon -= 4294967296
-                    lon /= 2^24
+                    lon /= 2**24
                     writer = csv.writer(f_coordinate)
                     writer.writerow([time, lat, lon])
                 if line[3] == '00000422':
@@ -347,7 +347,7 @@ for folder in Org_file_list:
                     alt_ellipsoid = int(line[4] + line[5] + line[6] + line[7], 16)
                     if alt_ellipsoid > 2147483647:
                         alt_ellipsoid -= 4294967296
-                    alt_ellipsoid /= 2^15
+                    alt_ellipsoid /= 2**15
                     writer = csv.writer(f_altitude)
                     writer.writerow([time, alt_ellipsoid])
                 if line[3] == '00020000':
@@ -708,10 +708,10 @@ for folder in Org_file_list:
         f_imu_status.close()
         f_pack_power.close()
         f_free_acc.close()
-        f_gry_hr.close()
+        f_gry.close()
         f_velocity.close()
         f_euler_angle.close()
-        f_acc_hr.close()
+        f_acc.close()
         f_coordinate.close()
         f_altitude.close()
         f_pack_status.close()
